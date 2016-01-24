@@ -45,6 +45,7 @@ public class UserFollowedFragment extends Fragment implements LoaderManager.Load
         mUsersAdapter = new UsersAdapter();
         listView.setAdapter(mUsersAdapter);
 
+
     }
 
     @Override

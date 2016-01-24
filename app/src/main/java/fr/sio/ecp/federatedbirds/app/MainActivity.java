@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                         startActivity(intent);
                         return true;
+
                 }
                 ((DrawerLayout) findViewById(R.id.drawer)).closeDrawer(navigationView);
                 return false;
@@ -103,5 +104,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     }
+
 
 }

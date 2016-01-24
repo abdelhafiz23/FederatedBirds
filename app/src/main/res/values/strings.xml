@@ -18,4 +18,5 @@
     <string name="empty_message_error">Message vide non posté.</string>
     <string name="progress">En cours...</string>
     <string name="post_failed">Le post a échoué.</string>
+    <string name="profile">Profile</string>
 </resources>

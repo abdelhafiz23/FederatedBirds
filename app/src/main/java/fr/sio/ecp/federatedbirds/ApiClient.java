@@ -25,7 +25,7 @@ import fr.sio.ecp.federatedbirds.model.User;
  */
 public class ApiClient {
 
-    private static final String API_BASE = "http://10.0.2.2:9000/";
+    private static final String API_BASE = "http://10.0.2.2:8080/";
 
     private static ApiClient mInstance;
 
