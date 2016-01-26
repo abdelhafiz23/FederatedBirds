@@ -27,7 +27,7 @@ import static android.support.v4.app.ActivityCompat.startActivity;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewHolder> {
 
     private List<User> mUsers;
-    private static User mUser,mUserclic=null;
+    private static User mUserclic=null;
 
     public void setUsers(List<User> users) {
         mUsers = users;
@@ -47,14 +47,23 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
-        User user = mUsers.get(position);
-        mUser=user;
+        final User user = mUsers.get(position);
 
         Picasso.with(holder.mAvatarView.getContext())
                 .load(user.avatar)
                 .into(holder.mAvatarView);
         Log.d("avatar", "displaying avatar");
-
+        holder.mAvatarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), UserProfileActivity.class);
+                intent.putExtra("userId",user.id);
+                intent.putExtra("userLogin",user.login);
+                intent.putExtra("userAvatar",user.avatar);
+                mUserclic=user;
+                v.getContext().startActivity(intent);
+            }
+        });
         holder.mUsernameView.setText(user.login);
     }
 
@@ -62,7 +71,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
         return mUserclic;
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class MessageViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView mAvatarView;
         private TextView mUsernameView;
@@ -71,16 +80,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.MessageViewH
             super(itemView);
             mAvatarView = (ImageView) itemView.findViewById(R.id.avatar);
             mUsernameView = (TextView) itemView.findViewById(R.id.username);
-            mAvatarView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (v instanceof ImageView){
-                Intent intent = new Intent(v.getContext(), UserProfileActivity.class);
-                mUserclic=mUser;
-                v.getContext().startActivity(intent);
-            }
         }
     }
 

@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
                                 .replace(R.id.main_container, fragment)
                                 .commit();
                         return true;
+                    case R.id.follower:
+                        fragment = new UserFollowerFragment();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.main_container, fragment)
+                                .commit();
+                        return true;
                     case R.id.settings:
                         Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                         startActivity(intent);

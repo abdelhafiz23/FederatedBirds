@@ -15,5 +15,8 @@ public class ValidationUtils {
     public static boolean validatePassword(String password) {
         return password != null && password.matches(PASSWORD_PATTERN);
     }
+    public static boolean validateEmail(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
 }

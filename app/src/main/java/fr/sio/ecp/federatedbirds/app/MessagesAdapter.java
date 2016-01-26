@@ -26,7 +26,7 @@ import static android.support.v4.app.ActivityCompat.startActivity;
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MessageViewHolder> {
 
     private List<Message> mMessages;
-    private static Message mMessage,mMessageclic=null;
+    private static Message mMessageclic=null;
     public void setMessages(List<Message> messages) {
         mMessages = messages;
         notifyDataSetChanged();
@@ -45,11 +45,21 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int position) {
-        Message message = mMessages.get(position);
-        mMessage = message;
+        final Message message = mMessages.get(position);
         Picasso.with(holder.mUserAvatarView.getContext())
                 .load(message.user.avatar)
                 .into(holder.mUserAvatarView);
+        holder.mUserAvatarView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), UserProfileActivity.class);
+                intent.putExtra("userId", message.user.id);
+                intent.putExtra("userLogin", message.user.login);
+                intent.putExtra("userAvatar", message.user.avatar);
+                mMessageclic=message;
+                v.getContext().startActivity(intent);
+            }
+        });
 
         holder.mTextView.setText(message.text);
 
@@ -59,7 +69,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
         return mMessageclic;
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MessageViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView mUserAvatarView;
         private TextView mTextView;
@@ -68,19 +78,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             super(itemView);
             mUserAvatarView = (ImageView) itemView.findViewById(R.id.avatar);
             mTextView = (TextView) itemView.findViewById(R.id.text);
-            mUserAvatarView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            if (v instanceof ImageView){
-                Intent intent = new Intent(v.getContext(), UserProfileActivity.class);
-                mMessageclic=mMessage;
-                v.getContext().startActivity(intent);
-
-            }
-
-        }
 
     }
     

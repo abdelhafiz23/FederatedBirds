@@ -19,4 +19,11 @@
     <string name="progress">En cours...</string>
     <string name="post_failed">Le post a échoué.</string>
     <string name="profile">Profile</string>
+    <string name="email">Email</string>
+    <string name="signup">Inscription</string>
+    <string name="already_signup">déja inscrit ? se connecter</string>
+    <string name="signup_message">Inscription</string>
+    <string name="signup_failed">Inscription échouée</string>
+    <string name="password_missmatch">Mot de passe non identique</string>
+    <string name="follower">Abonnés</string>
 </resources>
